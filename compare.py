@@ -1,4 +1,4 @@
-mport ast
+import ast
 import argparse
 
 
@@ -29,7 +29,7 @@ def LevenshteinDistance(first_text: str, second_text: str):
     return dp_counter[len(first_text) - 1][len(second_text) - 1]
 
 
-def CountScores(input_file, output_file):
+def CountScores(input_file : str, output_file : str):
     scores = list()
     with open(input_file) as filename:
         pairs_to_compare = filename.readlines()
@@ -55,4 +55,5 @@ parser = argparse.ArgumentParser()
 parser.add_argument("input_file")
 parser.add_argument("output_file")
 args = parser.parse_args()
+
 CountScores(args.input_file, args.output_file)
