@@ -71,16 +71,4 @@ parser.add_argument("input_file")
 parser.add_argument("output_file")
 args = parser.parse_args()
 
-CountScores(args.input_file, args.output_file) errors!")
-
-    with open(output_file, "w") as filename:
-        for i in range(len(scores)):
-            filename.write(str(scores[i]) + "\n")
-
-
-parser = argparse.ArgumentParser()
-parser.add_argument("input_file")
-parser.add_argument("output_file")
-args = parser.parse_args()
-
 CountScores(args.input_file, args.output_file)
