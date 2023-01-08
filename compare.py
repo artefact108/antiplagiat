@@ -2,9 +2,24 @@ import ast
 import argparse
 
 
+class NodeTransformation(ast.NodeTransformer):
+    def visit_Name(self, node):
+        return ast.Name(**{**node.__dict__, 'id': "var"})
+
+    def visit_FunctionDef(self, node):
+         return ast.FunctionDef(**{**node.__dict__, 'name': "func"})
+
+    def visit_ClassDef(self, node):
+         return ast.Name(**{**node.__dict__, 'name': "cl"})
+
+
+
+
+
 def NormalizeText(text: str):
     parsing_tree = ast.parse(text)
-    transformed_parse_tree = ast.NodeTransformer().visit(parsing_tree)
+
+    transformed_parse_tree = NodeTransformation().visit(parsing_tree)
     return ast.unparse(transformed_parse_tree)
 
 
@@ -45,6 +60,18 @@ def CountScores(input_file : str, output_file : str):
                                                        len(second))))
             except:
                 scores.append("This code has errors!")
+
+    with open(output_file, "w") as filename:
+        for i in range(len(scores)):
+            filename.write(str(scores[i]) + "\n")
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("input_file")
+parser.add_argument("output_file")
+args = parser.parse_args()
+
+CountScores(args.input_file, args.output_file) errors!")
 
     with open(output_file, "w") as filename:
         for i in range(len(scores)):
